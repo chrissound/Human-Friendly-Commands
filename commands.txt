@@ -1,0 +1,13 @@
+makeFilePermissionExecutable
+makeOwnedByMyself
+makeFilePermissionEverything
+findByFilename
+findByFilenameCaseInsensitive
+stopAllDockerContainers
+deleteDockerComposeVolumes
+listRunningDockerContainers
+cdGitProjectRoot
+pacmanInstall
+pacmanUpdate
+filterExclude
+filterOnly

@@ -1,4 +1,11 @@
+#files
 makeFilePermissionExecutable() { chmod +x $1 }
+makeOwnedByMyself() { sudo chown $USER:$USER -R $1 }
+makeFilePermissionEverything() { sudo chmod 777 -R $1 }
+
+#search
+findByFilename() { find . -name "$1" }
+findByFilenameCaseInsensitive() { find . -iname "$1" }
 
 #docker
 stopAllDockerContainers() { sudo docker stop `sudo docker ps -q`}
