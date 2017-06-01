@@ -1,5 +1,7 @@
 #Linux Command Lib
 
+![Alt text](input.gif?raw=true "Demonstration")
+
 Dependencies:
 fzf
 
