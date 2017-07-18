@@ -1,6 +1,6 @@
-#Linux Command Lib
+# Linux Command Lib
 
-##What problem does this solve?
+## What problem does this solve?
 It's just a collection of verbose commands that abstract away all the more complicated commands.
 
 For example to zip the contents of the current directory it's just `makeZip` instead of `zip -r filename.zip .`, and `makeOwnedByMyself filename` instead of `sudo chown $USER:$USER -R filname`.
