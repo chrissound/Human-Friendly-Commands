@@ -25,6 +25,7 @@ runCommandInDockerContainerWithContainerPrompt
 promptForRunningDockerContainer
 cdGitProjectRoot
 gitExportRepoAsZip
+git_AddModified_Commit_Push
 pacmanInstall
 pacmanUpdate
 startService
