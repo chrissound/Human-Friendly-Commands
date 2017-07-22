@@ -43,7 +43,7 @@ promptForRunningDockerContainer() { echo $(sudo docker ps --format "{{.Names}}" 
 # git
 cdGitProjectRoot() { cd "$(git rev-parse --show-toplevel)" ; }
 gitExportRepoAsZip() { git archive -o "$1" HEAD ; }
-git_AddModified_Commit_Push() { git commit -am "$1" && git push}
+git_AddModified_Commit_Push() { git commit -am "$1" && git push ; }
 
 # arch linux pacman
 pacmanInstall () { sudo pacman -S "$1"; }
