@@ -1,6 +1,8 @@
 makeFilePermissionExecutable
 makeOwnedByMyself
 makeFilePermissionEverything
+getLastModifiedFileInDirectory
+get_AbsolutePath_LastModifiedFileInDirectory
 llSortBySizeAscend
 llSortBySizeDescend
 llSortByTimeAscend

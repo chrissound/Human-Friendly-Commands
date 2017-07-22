@@ -1,7 +1,16 @@
+#!/usr/bin/env bash
+
 #files
 makeFilePermissionExecutable() { chmod +x $1 }
 makeOwnedByMyself() { sudo chown $USER:$USER -R $1 }
 makeFilePermissionEverything() { sudo chmod 777 -R $1 }
+getLastModifiedFileInDirectory() { ls -t $1 | head -n1 ; }
+get_AbsolutePath_LastModifiedFileInDirectory() {
+  # remove trailing slash
+	dir=${1%/}
+  lmf=$(getLastModifiedFileInDirectory $1)
+	echo "$dir/$lmf"
+}
 
 #listFiles
 alias llSortBySizeAscend="ll -S -h"
