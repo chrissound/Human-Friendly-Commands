@@ -33,11 +33,11 @@ getLatestCreatedDockerContainerId() { sudo docker ps -a --latest -q; }
 startLatestCreatedDockerContainer() { sudo docker start "$(sudo docker ps -a --latest -q)" }
 listDockerContainers() { sudo docker ps -a ; }
 listRunningDockerContainers() { sudo docker ps; }
-listRunningDockerContainerIps() { sudo docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}; }' $(sudo docker ps -q) ; }
-enterDockerContainerBash() { sudo docker exec -it "$(sudo docker ps --format "{{.Names; }; }" | fzf | cat)" /bin/bash ; }
+listRunningDockerContainerIps() { sudo docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(sudo docker ps -q) ; }
+enterDockerContainerBash() { sudo docker exec -it "$(sudo docker ps --format "{{.Names}}" | fzf | cat)" /bin/bash ; }
 runCommandInDockerContainer() { sudo docker exec -it "$@"; }
 runCommandInDockerContainerWithContainerPrompt() { sudo docker exec -it "$(promptForRunningDockerContainer)" "$@"; }
-promptForRunningDockerContainer() { echo $(sudo docker ps --format "{{.Names; }; }" | fzf) ; }
+promptForRunningDockerContainer() { echo $(sudo docker ps --format "{{.Names}}" | fzf) ; }
 
 
 # git
