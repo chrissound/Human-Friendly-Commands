@@ -8,7 +8,7 @@ For example to zip the contents of the current directory it's just `makeZip` ins
 If you use this with FZF, you only can fuzzily search for a command. For example `mz` for `MakeZip`.
 
 ## Demo
-![Alt text](input.gif?raw=true "Demonstration")
+[![Video demo](http://img.youtube.com/vi/Rv776AD46Lc/0.jpg)](http://www.youtube.com/watch?v=Rv776AD46Lc "Video demo") 
 
 ## Dependencies:
 - fzf
