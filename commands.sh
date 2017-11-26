@@ -17,54 +17,56 @@ deleteRecursive() { rm -rf "$1" ; }
 # directories
 deleteEmptyDirectories_Recursively() { find . -type d -empty -delete ; }
 
-#listFiles
-alias llSortBySizeAscend="ll -S -h"
-alias llSortBySizeDescend="ll -S -h -r"
-alias llSortByTime="ll -tr"
+#listFiles (requires exa)
+alias llSortBySizeAscend="exa -l --group-directories-first --sort=size"
+alias llSortBySizeDescend="exa -l --group-directories-first --sort=size -r"
+alias llSortByTime="exa -l --group-directories-first --sort=modified"
 
 # 
-makeZip() { zip -r "$(basename "$PWD" )" . ; }
-makeZipWithoutHiddenPaths() { zip -r  "$(basename "$PWD")" . -x '.*' ; }
+makeZip_CurrentDirectory() { zip -r "$(basename "$PWD" )" . ; }
+makeZip_CurrentDiretory_WithoutHidden() { zip -r  "$(basename "$PWD")" . -x '.*' ; }
 
 #search
 findByFilename() { find . -name "$1" ; }
 findByFilenameCaseInsensitive() { find . -iname "$1" ; }
 
 #docker (requires docker, docker-compose)
-stopAllDockerContainers() { sudo docker stop $(sudo docker ps -q); }
-deleteDockerComposeVolumes() { sudo docker-compose down -v ; }
-showLatestCreatedDockerContainer() { sudo docker ps -a --latest; }
-getLatestCreatedDockerContainerId() { sudo docker ps -a --latest -q; }
-startLatestCreatedDockerContainer() { sudo docker start "$(sudo docker ps -a --latest -q)" ;}
-listDockerContainers() { sudo docker ps -a ; }
-listRunningDockerContainers() { sudo docker ps; }
-listRunningDockerContainerIps() { sudo docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(sudo docker ps -q) ; }
-enterDockerContainerBash() { sudo docker exec -it "$(sudo docker ps --format "{{.Names}}" | fzf | cat)" /bin/bash ; }
-enterDockerContainerSh() { sudo docker exec -it "$(sudo docker ps --format "{{.Names}}" | fzf | cat)" /bin/sh ; }
-runCommandInDockerContainer() { sudo docker exec -it "$@"; }
-runCommandInDockerContainerWithContainerPrompt() { sudo docker exec -it "$(promptForRunningDockerContainer)" "$@"; }
-promptForRunningDockerContainer() { echo $(sudo docker ps --format "{{.Names}}" | fzf) ; }
-dockerComposeUp() { sudo docker-compose up ; }
-dockerComposeStop() { sudo docker-compose stop ; }
+docker_stopAllContainers() { sudo docker stop $(sudo docker ps -q); }
+docker_deleteComposeVolumes() { sudo docker-compose down -v ; }
+docker_showLatestCreatedContainer() { sudo docker ps -a --latest; }
+docker_getLatestCreatedContainerId() { sudo docker ps -a --latest -q; }
+docker_startLatestCreatedContainer() { sudo docker start "$(sudo docker ps -a --latest -q)" ;}
+docker_listContainers() { sudo docker ps -a ; }
+docker_listRunningContainers() { sudo docker ps; }
+docker_listRunningContainerIps() { sudo docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(sudo docker ps -q) ; }
+docker_enterContainerBash() { sudo docker exec -it "$(sudo docker ps --format "{{.Names}}" | fzf | cat)" /bin/bash ; }
+docker_enterContainerSh() { sudo docker exec -it "$(sudo docker ps --format "{{.Names}}" | fzf | cat)" /bin/sh ; }
+docker_runCommandInContainer() { sudo docker exec -it "$@"; }
+docker_runCommandInContainerWithContainerPrompt() { sudo docker exec -it "$(docker_promptForRunningContainer)" "$@"; }
+docker_promptForRunningContainer() { echo $(sudo docker ps --format "{{.Names}}" | fzf) ; }
+docker_dockerComposeUp() { sudo docker-compose up ; }
+docker_dockerComposeStop() { sudo docker-compose stop ; }
 
 #kubernetes
-kubectlDescribeLastPod() { kubectl describe pod $(kubectl get pods | tail -n +2 | awk '{print $1;}') ; }
-kubectlGetPods() { kubectl get pods ; }
-kubectlGetSvc() { kubectl get svc ; }
-kubectlGetDeployments() { kubectl get deployments ; }
-kubectlGetNodes() { kubectl get nodes ; }
+kubectl_DescribeLastPod() { kubectl describe pod $(kubectl get pods | tail -n +2 | awk '{print $1;}') ; }
+kubectl_GetPods() { kubectl get pods ; }
+kubectl_GetSvc() { kubectl get svc ; }
+kubectl_GetDeployments() { kubectl get deployments ; }
+kubectl_GetNodes() { kubectl get nodes ; }
+kubectl_EnterContainer() { kubectl exec -it $(sudo kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf) sh -c $1 }
 
 # git
-cdGitProjectRoot() { cd "$(git rev-parse --show-toplevel)" ; }
-gitExportRepoAsZip() { git archive -o "$1" HEAD ; }
+git_cdRoot() { cd "$(git rev-parse --show-toplevel)" ; }
+git_ExportRepoAsZip() { git archive -o "$1" HEAD ; }
 git_AddModified_Commit_Push() { git commit -am "$1" && git push ; }
 git_CurrentCommitHash() { git rev-parse HEAD ; }
-git_CurrentCommitHash_ToClipboard() { git_GetCurrentCommit | xclip ; }
-git_Branch() { git branch ; }
+git_CurrentCommitHash_ToClipboard() { git_CurrentCommitHash | xclip ; }
+git_Branch() { git branch -v -v; }
 git_Diff() { git diff && echo "********* GIT CACHED:*******" && git diff --cached ; }
 git_Status() { git status | tac; }
 git_Log() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | tac; }
 git_Log_NameOnly() { git log --name-only "$@" ; }
+gitResetToLatest() { git reset --hard HEAD; }
 
 # arch linux pacman
 pacmanInstall () { sudo pacman -S "$1"; }
@@ -74,15 +76,15 @@ pacmanUpdate () { sudo pacman -Syu ; }
 alias startService="sudo systemctl start "
 alias stopService="sudo systemctl stop "
 
-
 # outputFiltering
 alias filterExclude="rg -v"
 alias filterOnly="rg"
+alias filterExcludeEmptyLines="grep -v -e '^$'"
 
 # misc
 backup () { cp -r "$1" "$1".backup ; }
 restoreBackup () { cp -r "$1".backup "$1" ; }
-copyPathToClipboard () { readlink -f "$1" | xclip ; }
+copyPathToClipboard () { readlink --no-newline -f "$1" | xclip ; }
 # misc (requires xclip)
 copyFileToClipboard () { cat "$1" | xclip ; }
 sshSocksProxy() { ssh -D 8118 -f -C -q -N "$@" ; }

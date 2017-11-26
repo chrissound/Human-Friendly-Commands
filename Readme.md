@@ -29,3 +29,10 @@ fzf-linuxlib-widget() {
 zle     -N   fzf-linuxlib-widget
 bindkey '' fzf-linuxlib-widget
 ```
+
+
+## Extending
+If you modify the `commands.sh` file you can generate the corresponding `commands.txt` file with the below:
+
+    source commands.sh
+    cat commands.sh | filterExcludeEmptyLines | grep -v "^\s*\#" | grep ".*\(\)" | sed -e "s/\(.*\)().*/\1/"
