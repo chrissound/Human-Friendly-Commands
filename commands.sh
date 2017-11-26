@@ -62,7 +62,19 @@ git_AddModified_Commit_Push() { git commit -am "$1" && git push ; }
 git_CurrentCommitHash() { git rev-parse HEAD ; }
 git_CurrentCommitHash_ToClipboard() { git_CurrentCommitHash | xclip ; }
 git_Branch() { git branch -v -v; }
-git_Diff() { git diff && echo "********* GIT CACHED:*******" && git diff --cached ; }
+git_Diff() {
+  git --no-pager diff --stat
+  echo
+  git --no-pager diff
+  echo
+  echo "*************************************************"
+  echo "**************** GIT DIFF CACHED ****************"
+  echo "*************************************************"
+  echo
+  git --no-pager diff --stat --cached
+  echo
+  git --no-pager diff --cached
+}
 git_Status() { git status | tac; }
 git_Log() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | tac; }
 git_Log_NameOnly() { git log --name-only "$@" ; }
