@@ -14,9 +14,20 @@ If you use this with FZF, you only can fuzzily search for a command. For example
 - fzf
 
 ## Installation: 
+Run `./compile.sh` with the module files you want available.
+Example:
+`./compile.sh git.sh files.sh`
+
+To include everything:
+`./compile.sh exa.sh files.sh git.sh misc.sh`
+
+This will generate two files:
+`commands.sh` and `commands.txt`
+
 Add `commands.sh` to your PATH. The functions and aliases will then be availble in your command prompt.
 
-ZSH keybindng (bind `cat ~/Projects/LinuxCommandLib/commands.txt | fzf --height 25%` to `CTRL-Z`):
+You may need to modify the path below to where you have actually cloned down the repo.
+ZSH keybindng (bind `CTRL-Z` to `cat ~/Projects/LinuxCommandLib/commands.txt | fzf --height 25%`):
 
 ```
 fzf-linuxlib-widget() {
@@ -30,12 +41,14 @@ zle     -N   fzf-linuxlib-widget
 bindkey '' fzf-linuxlib-widget
 ```
 
+## Module files
+misc.sh
+exa.sh
+files.sh
+git.sh
 
 ## Extending
-If you modify the `commands.sh` file you can generate the corresponding `commands.txt` file with the below:
-
-    source commands.sh
-    cat commands.sh | filterExcludeEmptyLines | grep -v "^\s*\#" | grep ".*\(\)" | sed -e "s/\(.*\)().*/\1/"
+Just create your own module file, which is just a shell script with functions, and then rerun `compile.sh` with your module file specified in addition.
 
 ## Available commands
 
