@@ -76,9 +76,10 @@ git_Diff() {
   git --no-pager diff --cached
 }
 git_Status() { git status | tac; }
-git_Log() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | tac; }
+git_Log() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ; }
 git_Log_NameOnly() { git log --name-only "$@" ; }
-gitResetToLatest() { git reset --hard HEAD; }
+git_ResetToLatest() { git reset --hard HEAD; }
+git_checkoutPaths() { git checkout -- "$@" }
 
 # arch linux pacman
 pacmanInstall () { sudo pacman -S "$1"; }

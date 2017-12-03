@@ -41,7 +41,8 @@ git_Diff
 git_Status
 git_Log
 git_Log_NameOnly
-gitResetToLatest
+git_ResetToLatest
+git_checkoutPaths
 pacmanInstall 
 pacmanUpdate 
 backup 
