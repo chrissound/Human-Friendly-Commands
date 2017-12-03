@@ -42,10 +42,11 @@ bindkey '' fzf-linuxlib-widget
 ```
 
 ## Module files
-misc.sh
-exa.sh
-files.sh
-git.sh
+ - misc.sh
+ - exa.sh
+ - files.sh
+ - git.sh
+ - gitWithDiffSoFancy.sh
 
 ## Extending
 Just create your own module file, which is just a shell script with functions, and then rerun `compile.sh` with your module file specified in addition.
