@@ -10,14 +10,16 @@ git_Diff() {
   git --no-pager diff --stat
   echo
   git --no-pager diff
-  echo
-  echo "*************************************************"
-  echo "**************** GIT DIFF CACHED ****************"
-  echo "*************************************************"
-  echo
-  git --no-pager diff --stat --cached
-  echo
-  git --no-pager diff --cached
+  if ! git diff-index --cached --quiet HEAD --; then
+    echo
+    echo "*************************************************"
+    echo "**************** GIT DIFF CACHED ****************"
+    echo "*************************************************"
+    echo
+    git --no-pager diff --stat --cached
+    echo
+    git --no-pager diff --cached
+  fi
 }
 git_Status() { git status | tac; }
 git_Log() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ; }

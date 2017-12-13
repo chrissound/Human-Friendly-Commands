@@ -10,18 +10,21 @@ git_Diff() {
   git --no-pager diff --stat
   echo
   git --no-pager diff --color | diff-so-fancy
-  echo
-  echo "*************************************************"
-  echo "**************** GIT DIFF CACHED ****************"
-  echo "*************************************************"
-  echo
-  git --no-pager diff --stat --cached
-  echo
-  git --no-pager diff --cached --color | diff-so-fancy
+
+  if ! git diff-index --cached --quiet HEAD --; then
+    echo
+    echo "*************************************************"
+    echo "**************** GIT DIFF CACHED ****************"
+    echo "*************************************************"
+    echo
+    git --no-pager diff --stat --cached
+    echo
+    git --no-pager diff --cached --color | diff-so-fancy
+  fi
 
 }
 git_Status() { git status | tac; }
 git_Log() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ; }
 git_Log_NameOnly() { git log --name-only "$@" ; }
-git_ResetToLatest() { git reset --hard HEAD; }
-git_checkoutPaths() { git checkout -- "$@" }
+git_ResetToLatest() { git reset --hard HEAD ; }
+git_checkoutPaths() { git checkout -- "$@" ; }
