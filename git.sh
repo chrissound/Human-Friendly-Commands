@@ -26,3 +26,4 @@ git_Log() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 git_Log_NameOnly() { git log --name-only "$@" ; }
 git_ResetToLatest() { git reset --hard HEAD; }
 git_checkoutPaths() { git checkout -- "$@" }
+git_FirstCommitHash() { git rev-list --max-parents=0 HEAD ; }
