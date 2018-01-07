@@ -19,7 +19,7 @@ Example:
 `./compile.sh git.sh files.sh`
 
 To include everything:
-`./compile.sh exa.sh files.sh git.sh misc.sh`
+`./compile.sh exa.sh files.sh gitWithDiffSoFancy.sh misc.sh gitCommon.sh github.sh`
 
 This will generate two files:
 `commands.sh` and `commands.txt`
