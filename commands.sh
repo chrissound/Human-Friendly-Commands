@@ -123,7 +123,8 @@ git_initAndCommitInitial() { git init; git add .; git commit -m "inital" }
 
 # Create a repo named by the current directory
 # Accepts 1 STRING parameter for the repo description
-# Depends on: jq
+# Depends on bin: jq
+# Depends on env: GITHUB_USER, GITHUB_API_TOKEN
 github_createRepo() {
   projName="$(basename "$PWD")"
   json=$(jq -n \
@@ -131,7 +132,7 @@ github_createRepo() {
     --arg description "$1" \
     '{"name":$name, "description":$description}')
 
-  curl -u "$GITHUB_USER":"$GITHUB_PASSWORD" https://api.github.com/user/repos -d "$json"
+  curl -u "$GITHUB_USER":"$GITHUB_API_TOKEN" https://api.github.com/user/repos -d "$json"
   git init
   git remote add origin git@github.com:"$GITHUB_USER"/"$projName".git
   git push origin master
