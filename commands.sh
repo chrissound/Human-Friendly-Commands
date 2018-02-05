@@ -25,6 +25,7 @@ deleteRecursive() { rm -rf "$1" ; }
 
 # directories
 deleteEmptyDirectories_Recursively() { find . -type d -empty -delete ; }
+file_getOctalPermission() { stat -c "%a %n" "$@" ; }
 #!/usr/bin/env bash
 
 git_cdRoot() { cd "$(git rev-parse --show-toplevel)" ; }
@@ -118,7 +119,8 @@ newEditFile() { touch "$1" && $EDITOR "$1" ; }
 newEditExecutableFile() { touch "$1" && makeFilePermissionExecutable "$1"  && $EDITOR "$1" ; }
 #!/usr/bin/env bash
 
-git_initAndCommitInitial() { git init; git add .; git commit -m "inital" }
+git_initAndCommitInitial() { git init; git add .; git commit -m "inital" ;}
+git_DiffPager() { git_Diff | less ; }
 #!/usr/bin/env bash
 
 # Create a repo named by the current directory

@@ -6,6 +6,7 @@ get_AbsolutePath_LastModifiedFileInDirectory
 deleteEmptyFiles_Recursively
 deleteRecursive
 deleteEmptyDirectories_Recursively
+file_getOctalPermission
 git_cdRoot
 git_ExportRepoAsZip
 git_AddModified_Commit_Push
@@ -54,6 +55,7 @@ sshSocksProxy
 newEditFile
 newEditExecutableFile
 git_initAndCommitInitial
+git_DiffPager
 github_createRepo
 llSortBySizeAscend
 llSortBySizeDescend

@@ -16,3 +16,4 @@ deleteRecursive() { rm -rf "$1" ; }
 
 # directories
 deleteEmptyDirectories_Recursively() { find . -type d -empty -delete ; }
+file_getOctalPermission() { stat -c "%a %n" "$@" ; }
