@@ -17,12 +17,12 @@ This also provides a benefit where you can search the list of functions names. I
 [![Video demo](http://img.youtube.com/vi/Rv776AD46Lc/0.jpg)](http://www.youtube.com/watch?v=Rv776AD46Lc "Video demo") 
 
 ## Installation:
-Run `./compile.sh` with the module files you want available.
+Run `./compile.sh` with the modules you want available.
 Example:
-`./compile.sh git.sh files.sh`
+`./compile.sh git files`
 
 To include everything:
-`./compile.sh exa.sh files.sh gitWithDiffSoFancy.sh misc.sh gitCommon.sh github.sh`
+`./compile.sh exa files gitWithDiffSoFancy misc gitCommon github haskell docker kubernetes`
 
 This will generate two files:
 `commands.sh` and `commands.txt`
@@ -48,8 +48,7 @@ bindkey '' fzf-linuxlib-widget
 
 ## Module files
 
-## Extending
-Just create your own module file, which is just a shell script with functions or aliases, and then rerun `compile.sh` with your module file specified in addition.
+Just create your own module file within `modules/`, it is just a shell script with functions or aliases, and then rerun `compile.sh` with your module file specified in addition.
 
 ## Available commands
 

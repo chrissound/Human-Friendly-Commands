@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 set -x
+set -e
 shopt -s expand_aliases
 
-source files.sh
-source misc.sh
+source modules/files.sh
+source modules/misc.sh
 
-cat "$@" > commands.sh
+truncate -s 0 commands.sh
+for var in "$@"
+do
+  cat modules/"$var".sh >> commands.sh 
+done
 
 # Extract function names
 cat commands.sh | filterExcludeEmptyLines | \
