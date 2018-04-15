@@ -5,10 +5,10 @@
 It is a mapping of simple function / alias names to more complicated commands. I would describe it as a list of functions that cover 80% of my common command uses.
 
 For example:
-- *makeOwnedByMyself* - `sudo chown "$USER":"$USER" -R "$@"`
-- *deleteEmptyDirectories_Recursively* - `find . -type d -empty -delete`
-- *git_initAndCommitInitial* - `git init; git add .; git commit -m "inital" `
-- *makeZip_CurrentDirectory*  - `zip -r "$(basename "$PWD" )" . `
+- **makeOwnedByMyself** - `sudo chown "$USER":"$USER" -R "$@"`
+- **deleteEmptyDirectories_Recursively** - `find . -type d -empty -delete`
+- **git_initAndCommitInitial** - `git init; git add .; git commit -m "inital" `
+- **makeZip_CurrentDirectory**  - `zip -r "$(basename "$PWD" )" . `
 
 This also provides a benefit where you can search the list of functions names. I personally use `fzf` to fuzzy search the list - so I type 'cc' to get to the `clipboard_copyCurrentPath`. 
 
@@ -18,6 +18,7 @@ This also provides a benefit where you can search the list of functions names. I
 
 ## Installation:
 Run `./compile.sh` with the modules you want available.
+
 Example:
 `./compile.sh git files`
 
