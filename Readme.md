@@ -1,19 +1,22 @@
-# Linux Command Lib
+# Linux HumanFriendlyCommand
 
 ## What problem does this solve?
-It's just a collection of verbose commands that abstract away all the more complicated commands.
 
-For example to zip the contents of the current directory it's just `makeZip` instead of `zip -r filename.zip .`, and `makeOwnedByMyself filename` instead of `sudo chown $USER:$USER -R filname`.
+It is a mapping of simple function / alias names to more complicated commands. I would describe it as a list of functions that cover 80% of my common command uses.
 
-If you use this with FZF, you only can fuzzily search for a command. For example `mz` for `MakeZip`.
+For example:
+- *makeOwnedByMyself* - `sudo chown "$USER":"$USER" -R "$@"`
+- *deleteEmptyDirectories_Recursively* - `find . -type d -empty -delete`
+- *git_initAndCommitInitial* - `git init; git add .; git commit -m "inital" `
+- *makeZip_CurrentDirectory*  - `zip -r "$(basename "$PWD" )" . `
 
-## Demo
+This also provides a benefit where you can search the list of functions names. I personally use `fzf` to fuzzy search the list - so I type 'cc' to get to the `clipboard_copyCurrentPath`. 
+
+
+## Demo (quite outdated)
 [![Video demo](http://img.youtube.com/vi/Rv776AD46Lc/0.jpg)](http://www.youtube.com/watch?v=Rv776AD46Lc "Video demo") 
 
-## Dependencies:
-- fzf
-
-## Installation: 
+## Installation:
 Run `./compile.sh` with the module files you want available.
 Example:
 `./compile.sh git.sh files.sh`
@@ -23,6 +26,8 @@ To include everything:
 
 This will generate two files:
 `commands.sh` and `commands.txt`
+
+## FZF configuration: 
 
 Add `commands.sh` to your PATH. The functions and aliases will then be availble in your command prompt.
 
@@ -42,14 +47,9 @@ bindkey '' fzf-linuxlib-widget
 ```
 
 ## Module files
- - misc.sh
- - exa.sh
- - files.sh
- - git.sh
- - gitWithDiffSoFancy.sh
 
 ## Extending
-Just create your own module file, which is just a shell script with functions, and then rerun `compile.sh` with your module file specified in addition.
+Just create your own module file, which is just a shell script with functions or aliases, and then rerun `compile.sh` with your module file specified in addition.
 
 ## Available commands
 
@@ -61,10 +61,43 @@ Just create your own module file, which is just a shell script with functions, a
 - deleteEmptyFiles_Recursively
 - deleteRecursive
 - deleteEmptyDirectories_Recursively
+- file_getOctalPermission
+- git_cdRoot
+- git_ExportRepoAsZip
+- git_AddModified_Commit_Push
+- git_CurrentCommitHash
+- git_CurrentCommitHash_ToClipboard
+- git_Branch
+- git_Diff
+- git_Status
+- git_Log
+- git_Log_NameOnly
+- git_ResetToLatest
+- git_checkoutPaths
+- git_FirstCommitHash
 - makeZip_CurrentDirectory
 - makeZip_CurrentDiretory_WithoutHidden
 - findByFilename
 - findByFilenameCaseInsensitive
+- isTextPresentInFilodir
+- pacmanInstall 
+- pacmanUpdate 
+- backup 
+- restoreBackup 
+- clipboard_copyPath 
+- clipboard_copyCurrentPath 
+- clipboard_copyFileContents 
+- sshSocksProxy
+- newEditFile
+- newEditExecutableFile
+- date_ddmmyyyy 
+- wget_toStdOut
+- wget_ignoreSslCert
+- git_initAndCommitInitial
+- git_DiffPager
+- github_createRepo
+- hpack_AddDependencyNaively
+- hoogle_searchAndCopy
 - docker_stopAllContainers
 - docker_deleteComposeVolumes
 - docker_showLatestCreatedContainer
@@ -86,23 +119,11 @@ Just create your own module file, which is just a shell script with functions, a
 - kubectl_GetDeployments
 - kubectl_GetNodes
 - kubectl_EnterContainer
-- git_cdRoot
-- git_ExportRepoAsZip
-- git_AddModified_Commit_Push
-- git_CurrentCommitHash
-- git_CurrentCommitHash_ToClipboard
-- git_Branch
-- git_Diff
-- git_Status
-- git_Log
-- git_Log_NameOnly
-- gitResetToLatest
-- pacmanInstall 
-- pacmanUpdate 
-- backup 
-- restoreBackup 
-- copyPathToClipboard 
-- copyFileToClipboard 
-- sshSocksProxy
-- newEditFile
-- newEditExecutableFile
+- llSortBySizeAscend
+- llSortBySizeDescend
+- llSortByTime
+- startService
+- stopService
+- filterExclude
+- filterOnly
+- filterExcludeEmptyLines
