@@ -35,10 +35,14 @@ clipboard_copyFileContents
 sshSocksProxy
 newEditFile
 newEditExecutableFile
+date_ddmmyyyy 
+wget_toStdOut
+wget_ignoreSslCert
 git_initAndCommitInitial
 git_DiffPager
 github_createRepo
 hpack_AddDependencyNaively
+hoogle_searchAndCopy
 docker_stopAllContainers
 docker_deleteComposeVolumes
 docker_showLatestCreatedContainer

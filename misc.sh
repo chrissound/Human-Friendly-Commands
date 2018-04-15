@@ -33,3 +33,8 @@ clipboard_copyFileContents () { xclip < "$1"; }
 sshSocksProxy() { ssh -D 8118 -f -C -q -N "$@" ; }
 newEditFile() { touch "$1" && $EDITOR "$1" ; }
 newEditExecutableFile() { touch "$1" && makeFilePermissionExecutable "$1"  && $EDITOR "$1" ; }
+
+date_ddmmyyyy () { date '+%d-%m-%Y' ;}
+
+wget_toStdOut() { wget -qO- "$@" ;}
+wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}

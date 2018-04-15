@@ -92,6 +92,11 @@ clipboard_copyFileContents () { xclip < "$1"; }
 sshSocksProxy() { ssh -D 8118 -f -C -q -N "$@" ; }
 newEditFile() { touch "$1" && $EDITOR "$1" ; }
 newEditExecutableFile() { touch "$1" && makeFilePermissionExecutable "$1"  && $EDITOR "$1" ; }
+
+date_ddmmyyyy () { date '+%d-%m-%Y' ;}
+
+wget_toStdOut() { wget -qO- "$@" ;}
+wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}
 #!/usr/bin/env bash
 
 git_initAndCommitInitial() { git init; git add .; git commit -m "inital" ;}
@@ -128,6 +133,11 @@ hpack_AddDependencyNaively() {
   fi
 }
 
+hoogle_searchAndCopy() {
+  wget -qO- https://hoogle.haskell.org/\?hoogle\="$1"\&scope\=set%3Astackage\&mode\=json \
+    | jq -r ".[] | \"import \\(.module.name)\\n\\(.package.name)\\n--\"" \
+    | fzf | xclip ;
+  }
 # (requires docker, docker-compose)
 docker_stopAllContainers() { sudo docker stop $(sudo docker ps -q); }
 docker_deleteComposeVolumes() { sudo docker-compose down -v ; }
