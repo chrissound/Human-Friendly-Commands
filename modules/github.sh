@@ -12,8 +12,13 @@ github_createRepo() {
     '{"name":$name, "description":$description}')
 
   curl -u "$GITHUB_USER":"$GITHUB_API_TOKEN" https://api.github.com/user/repos -d "$json"
-  git init
-  git remote add origin git@github.com:"$GITHUB_USER"/"$projName".git
-  git push origin master
+  if [ -d .git ]; then
+    git remote set-url origin git@github.com:"$GITHUB_USER"/"$projName".git
+    git push origin master
+  else
+    git init
+    git remote add origin git@github.com:"$GITHUB_USER"/"$projName".git
+    git push origin master
+  fi;
 };
 
