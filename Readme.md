@@ -1,4 +1,4 @@
-# Linux HumanFriendlyCommand
+# Human Friendly Commands
 
 ## What problem does this solve?
 
