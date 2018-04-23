@@ -25,6 +25,8 @@ alias filterExcludeEmptyLines="grep -v -e '^$'"
 
 # misc
 backup () { cp -r "$1" "$1".backup ; }
+backup_appendWithDate () { cp -r "$1" "$1"."$(date_ddmmyyyy)".backup ; }
+backup_appendWithTimeDate () { cp -r "$1" "$1"."$(date_hhmmssddmmyyyy)".backup ; }
 restoreBackup () { cp -r "$1".backup "$1" ; }
 clipboard_copyPath () { readlink --no-newline -f "$1" | xclip -selection clipboard ; }
 clipboard_copyCurrentPath () { clipboard_copyPath "$(pwd)"; }
@@ -35,6 +37,7 @@ newEditFile() { touch "$1" && $EDITOR "$1" ; }
 newEditExecutableFile() { touch "$1" && makeFilePermissionExecutable "$1"  && $EDITOR "$1" ; }
 
 date_ddmmyyyy () { date '+%d-%m-%Y' ;}
+date_hhmmssddmmyyyy () { date '+%H-%M-%S-%d-%m-%Y' ;}
 
 wget_toStdOut() { wget -qO- "$@" ;}
 wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}

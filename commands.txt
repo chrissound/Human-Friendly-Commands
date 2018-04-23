@@ -28,6 +28,8 @@ isTextPresentInFilodir
 pacmanInstall 
 pacmanUpdate 
 backup 
+backup_appendWithDate 
+backup_appendWithTimeDate 
 restoreBackup 
 clipboard_copyPath 
 clipboard_copyCurrentPath 
@@ -36,6 +38,7 @@ sshSocksProxy
 newEditFile
 newEditExecutableFile
 date_ddmmyyyy 
+date_hhmmssddmmyyyy 
 wget_toStdOut
 wget_ignoreSslCert
 git_initAndCommitInitial
