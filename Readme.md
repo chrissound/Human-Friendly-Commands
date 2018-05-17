@@ -17,6 +17,7 @@ This also provides a benefit where you can search the list of functions names. I
 [![Video demo](http://img.youtube.com/vi/Rv776AD46Lc/0.jpg)](http://www.youtube.com/watch?v=Rv776AD46Lc "Video demo") 
 
 ## Installation:
+Clone
 Run `./compile.sh` with the modules you want available.
 
 Example:
@@ -28,9 +29,9 @@ To include everything:
 This will generate two files:
 `commands.sh` and `commands.txt`
 
-## FZF configuration: 
+Add `source path/to/commands.sh` to your shell startup (`~/.bashrc` for bash). The functions and aliases will then be availble in your command prompt.
 
-Add `commands.sh` to your PATH. The functions and aliases will then be availble in your command prompt.
+## FZF configuration: 
 
 You may need to modify the path below to where you have actually cloned down the repo.
 ZSH keybindng (bind `CTRL-Z` to `cat ~/Projects/LinuxCommandLib/commands.txt | fzf --height 25%`):
