@@ -11,9 +11,18 @@ get_AbsolutePath_LastModifiedFileInDirectory() {
   lmf=$(getLastModifiedFileInDirectory "$1")
 	echo "$dir/$lmf"
 }
-deleteEmptyFiles_Recursively() { find . -type f -empty -delete ; }
-deleteRecursive() { rm -rf "$1" ; }
+delete_EmptyFiles_Recursively() { find . -type f -empty -delete ; }
+delete_Recursive() { rm -rf "$1" ; }
+delete_EverythingInCurrentDir() { find . -delete; }
+get_firstFileWithExtension() { find -iname "*.$1" | head -n 1 ; }
 
 # directories
-deleteEmptyDirectories_Recursively() { find . -type d -empty -delete ; }
+delete_EmptyDirectories_Recursively() { find . -type d -empty -delete ; }
 file_getOctalPermission() { stat -c "%a %n" "$@" ; }
+
+createFile() {
+  for p do
+    _dir="$(dirname -- "$p")"
+    mkdir -p -- "$_dir" && touch -- "$p"
+  done
+}

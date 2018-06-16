@@ -3,7 +3,8 @@
 # Dependencies: exa
 
 #listFiles
-alias llSortBySizeAscend="exa -l --group-directories-first --sort=size"
-alias llSortBySizeDescend="exa -l --group-directories-first --sort=size -r"
-alias llSortByTime="exa -l --group-directories-first --sort=modified"
+alias listDirectoryContentsSortBySizeAscend="exa -l --group-directories-first --sort=size"
+alias listDirectoryContentsSortBySizeDescend="exa -l --group-directories-first --sort=size -r"
+alias listDirectoryContentsSortByTimeAscend="exa -l --group-directories-first --sort=modified"
+alias listDirectoryContentsSortByTimeDescend="exa -l --group-directories-first --sort=modified -r"
 

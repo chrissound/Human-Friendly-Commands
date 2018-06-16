@@ -13,6 +13,4 @@ hpack_AddDependencyNaively() {
 
 hoogle_searchAndCopy() {
   wget -qO- https://hoogle.haskell.org/\?hoogle\="$1"\&scope\=set%3Astackage\&mode\=json \
-    | jq -r ".[] | \"import \\(.module.name)\\n\\(.package.name)\\n--\"" \
-    | fzf | xclip ;
   }

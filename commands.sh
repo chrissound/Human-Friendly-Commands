@@ -3,9 +3,10 @@
 # Dependencies: exa
 
 #listFiles
-alias llSortBySizeAscend="exa -l --group-directories-first --sort=size"
-alias llSortBySizeDescend="exa -l --group-directories-first --sort=size -r"
-alias llSortByTime="exa -l --group-directories-first --sort=modified"
+alias listDirectoryContentsSortBySizeAscend="exa -l --group-directories-first --sort=size"
+alias listDirectoryContentsSortBySizeDescend="exa -l --group-directories-first --sort=size -r"
+alias listDirectoryContentsSortByTimeAscend="exa -l --group-directories-first --sort=modified"
+alias listDirectoryContentsSortByTimeDescend="exa -l --group-directories-first --sort=modified -r"
 
 #!/usr/bin/env bash
 
@@ -20,12 +21,21 @@ get_AbsolutePath_LastModifiedFileInDirectory() {
   lmf=$(getLastModifiedFileInDirectory "$1")
 	echo "$dir/$lmf"
 }
-deleteEmptyFiles_Recursively() { find . -type f -empty -delete ; }
-deleteRecursive() { rm -rf "$1" ; }
+delete_EmptyFiles_Recursively() { find . -type f -empty -delete ; }
+delete_Recursive() { rm -rf "$1" ; }
+delete_EverythingInCurrentDir() { find . -delete; }
+get_firstFileWithExtension() { find -iname "*.$1" | head -n 1 ; }
 
 # directories
-deleteEmptyDirectories_Recursively() { find . -type d -empty -delete ; }
+delete_EmptyDirectories_Recursively() { find . -type d -empty -delete ; }
 file_getOctalPermission() { stat -c "%a %n" "$@" ; }
+
+createFile() {
+  for p do
+    _dir="$(dirname -- "$p")"
+    mkdir -p -- "$_dir" && touch -- "$p"
+  done
+}
 #!/usr/bin/env bash
 
 git_cdRoot() { cd "$(git rev-parse --show-toplevel)" ; }
@@ -104,6 +114,7 @@ wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}
 
 git_initAndCommitInitial() { git init; git add .; git commit -m "inital" ;}
 git_DiffPager() { git_Diff | less ; }
+git_searchCommitMessagesInAllBranches() { git log --all --grep="$1" }
 #!/usr/bin/env bash
 
 # Create a repo named by the current directory
@@ -143,8 +154,6 @@ hpack_AddDependencyNaively() {
 
 hoogle_searchAndCopy() {
   wget -qO- https://hoogle.haskell.org/\?hoogle\="$1"\&scope\=set%3Astackage\&mode\=json \
-    | jq -r ".[] | \"import \\(.module.name)\\n\\(.package.name)\\n--\"" \
-    | fzf | xclip ;
   }
 # (requires docker, docker-compose)
 docker_stopAllContainers() { sudo docker stop $(sudo docker ps -q); }
@@ -170,4 +179,8 @@ kubectl_GetPods() { kubectl get pods "$@"; }
 kubectl_GetSvc() { kubectl get svc "$@"; }
 kubectl_GetDeployments() { kubectl get deployments "$@"; }
 kubectl_GetNodes() { kubectl get nodes "$@"; }
-kubectl_EnterContainer() { kubectl exec -it "$(sudo kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" sh -c "$1" ; }
+kubectl_EnterContainer() { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" sh -c "$1" ; }
+#!/usr/bin/env bash
+
+network_findProcessUsingPort() { sudo netstat -tulpn | rg "$1" ; }
+network_findProcessIdUsingPort() { sudo netstat -tlnp | awk '/:'"$1"' */ {split($NF,a,"/"); print a[1]}'; }
