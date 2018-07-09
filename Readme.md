@@ -54,15 +54,19 @@ Just create your own module file within `modules/`, it is just a shell script wi
 
 ## Available commands
 
+
 - makeFilePermissionExecutable
 - makeOwnedByMyself
 - makeFilePermissionEverything
 - getLastModifiedFileInDirectory
 - get_AbsolutePath_LastModifiedFileInDirectory
-- deleteEmptyFiles_Recursively
-- deleteRecursive
-- deleteEmptyDirectories_Recursively
+- delete_EmptyFiles_Recursively
+- delete_Recursive
+- delete_EverythingInCurrentDir
+- get_firstFileWithExtension
+- delete_EmptyDirectories_Recursively
 - file_getOctalPermission
+- createFile
 - git_cdRoot
 - git_ExportRepoAsZip
 - git_AddModified_Commit_Push
@@ -84,6 +88,8 @@ Just create your own module file within `modules/`, it is just a shell script wi
 - pacmanInstall 
 - pacmanUpdate 
 - backup 
+- backup_appendWithDate 
+- backup_appendWithTimeDate 
 - restoreBackup 
 - clipboard_copyPath 
 - clipboard_copyCurrentPath 
@@ -92,10 +98,12 @@ Just create your own module file within `modules/`, it is just a shell script wi
 - newEditFile
 - newEditExecutableFile
 - date_ddmmyyyy 
+- date_hhmmssddmmyyyy 
 - wget_toStdOut
 - wget_ignoreSslCert
 - git_initAndCommitInitial
 - git_DiffPager
+- git_searchCommitMessagesInAllBranches
 - github_createRepo
 - hpack_AddDependencyNaively
 - hoogle_searchAndCopy
@@ -115,14 +123,25 @@ Just create your own module file within `modules/`, it is just a shell script wi
 - docker_dockerComposeUp
 - docker_dockerComposeStop
 - kubectl_DescribeLastPod
+- kubectl_DescribePod
 - kubectl_GetPods
+- kubectl_GetAllPods
 - kubectl_GetSvc
 - kubectl_GetDeployments
+- kubectl_GetAllDeployments
+- kubectl_GetServices
+- kubectl_GetAllServices
+- kubectl_GetIngress
+- kubectl_GetAllIngress
 - kubectl_GetNodes
+- kubectl_Logs
 - kubectl_EnterContainer
-- llSortBySizeAscend
-- llSortBySizeDescend
-- llSortByTime
+- network_findProcessUsingPort
+- network_findProcessIdUsingPort
+- listDirectoryContentsSortBySizeAscend
+- listDirectoryContentsSortBySizeDescend
+- listDirectoryContentsSortByTimeAscend
+- listDirectoryContentsSortByTimeDescend
 - startService
 - stopService
 - filterExclude
