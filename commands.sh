@@ -174,20 +174,26 @@ docker_promptForRunningContainer() { echo $(sudo docker ps --format "{{.Names}}"
 docker_dockerComposeUp() { sudo docker-compose up ; }
 docker_dockerComposeStop() { sudo docker-compose stop ; }
 
-kubectl_DescribeLastPod()   { kubectl describe pod "$(kubectl get pods | tail -n +2 | awk '{print $1;}')" "$@" ; }
-kubectl_DescribePod()       { kubectl describe pod "$@" ; }
-kubectl_GetPods()           { kubectl get pods "$@"; }
-kubectl_GetAllPods()        { kubectl get pods --all-namespaces "$@"; }
-kubectl_GetSvc()            { kubectl get svc "$@"; }
-kubectl_GetDeployments()    { kubectl get deployments "$@"; }
-kubectl_GetAllDeployments() { kubectl get deployments --all-namespaces "$@"; }
-kubectl_GetServices()       { kubectl get services "$@"; }
-kubectl_GetAllServices()    { kubectl get services --all-namespaces "$@"; }
-kubectl_GetIngress()        { kubectl get ingress "$@"; }
-kubectl_GetAllIngress()     { kubectl get ingress --all-namespaces "$@"; }
-kubectl_GetNodes()          { kubectl get nodes "$@"; }
-kubectl_Logs()              { kubectl logs "$@"; }
-kubectl_EnterContainer()    { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" sh -c "$1" ; }
+kubectl_describeLastPod()    { kubectl describe pod "$(kubectl get pods | tail -n +2 | awk '{print $1;}')" "$@" ; }
+kubectl_describePod()        { kubectl describe pod "$@" ; }
+kubectl_getPods()            { kubectl get pods "$@"; }
+kubectl_getAllPods()         { kubectl get pods --all-namespaces "$@"; }
+
+kubectl_getDeployments()     { kubectl get deployments "$@"; }
+kubectl_getAllDeployments()  { kubectl get deployments --all-namespaces "$@"; }
+
+kubectl_describeService()    { kubectl describe service "$@"; }
+kubectl_getServices()        { kubectl get services "$@"; }
+kubectl_getAllServices()     { kubectl get services --all-namespaces "$@"; }
+
+kubectl_describeIngress()    { kubectl describe ingress "$@"; }
+kubectl_getIngress()         { kubectl get ingress "$@"; }
+kubectl_getAllIngress()      { kubectl get ingress --all-namespaces "$@"; }
+
+kubectl_getNodes()           { kubectl get nodes "$@"; }
+kubectl_logs()               { kubectl logs "$@"; }
+kubectl_enterContainerSh()   { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" sh -c "$1" ; }
+kubectl_enterContainerBash() { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" bash -c "$1" ; }
 #!/usr/bin/env bash
 
 network_findProcessUsingPort() { sudo netstat -tulpn | rg "$1" ; }
