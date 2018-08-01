@@ -1,4 +1,4 @@
-kubectl_describeLastPod()    { kubectl describe pod "$(kubectl get pods | tail -n +2 | awk '{print $1;}')" "$@" ; }
+kubectl_describeLastPod()    { kubectl describe pod "$(kubectl get pods --sort-by=.metadata.creationTimestamp | tail -n -1 | awk '{print $1;}')" "$@" ; }
 kubectl_describePod()        { kubectl describe pod "$@" ; }
 kubectl_getPods()            { kubectl get pods "$@"; }
 kubectl_getAllPods()         { kubectl get pods --all-namespaces "$@"; }
@@ -18,3 +18,8 @@ kubectl_getNodes()           { kubectl get nodes "$@"; }
 kubectl_logs()               { kubectl logs "$@"; }
 kubectl_enterContainerSh()   { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" sh -c "$1" ; }
 kubectl_enterContainerBash() { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" bash -c "$1" ; }
+
+kubectl_create_byFile()           { kubectl create -f "$@"; }
+kubectl_apply_byFile()           { kubectl apply -f "$@"; }
+kubectl_replace_byFile()           { kubectl replace -f "$@"; }
+kubectl_delete_byFile()           { kubectl delete -f "$@"; }

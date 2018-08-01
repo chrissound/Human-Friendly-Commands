@@ -44,6 +44,7 @@ date_ddmmyyyy
 date_hhmmssddmmyyyy 
 wget_toStdOut
 wget_ignoreSslCert
+file_delete_line
 git_initAndCommitInitial
 git_DiffPager
 git_searchCommitMessagesInAllBranches
@@ -81,6 +82,10 @@ kubectl_getNodes
 kubectl_logs
 kubectl_enterContainerSh
 kubectl_enterContainerBash
+kubectl_create_byFile
+kubectl_apply_byFile
+kubectl_replace_byFile
+kubectl_delete_byFile
 network_findProcessUsingPort
 network_findProcessIdUsingPort
 listDirectoryContentsSortBySizeAscend

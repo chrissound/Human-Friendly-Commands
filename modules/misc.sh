@@ -41,3 +41,6 @@ date_hhmmssddmmyyyy () { date '+%H-%M-%S-%d-%m-%Y' ;}
 
 wget_toStdOut() { wget -qO- "$@" ;}
 wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}
+
+# file manipulation
+file_delete_line() { sed -i "${2}d" "$1" ;}

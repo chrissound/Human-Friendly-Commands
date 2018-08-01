@@ -110,6 +110,9 @@ date_hhmmssddmmyyyy () { date '+%H-%M-%S-%d-%m-%Y' ;}
 
 wget_toStdOut() { wget -qO- "$@" ;}
 wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}
+
+# file manipulation
+file_delete_line() { sed -i "${2}d" "$1" ;}
 #!/usr/bin/env bash
 
 git_initAndCommitInitial() { git init; git add .; git commit -m "inital" ;}
@@ -174,7 +177,7 @@ docker_promptForRunningContainer() { echo $(sudo docker ps --format "{{.Names}}"
 docker_dockerComposeUp() { sudo docker-compose up ; }
 docker_dockerComposeStop() { sudo docker-compose stop ; }
 
-kubectl_describeLastPod()    { kubectl describe pod "$(kubectl get pods | tail -n +2 | awk '{print $1;}')" "$@" ; }
+kubectl_describeLastPod()    { kubectl describe pod "$(kubectl get pods --sort-by=.metadata.creationTimestamp | tail -n -1 | awk '{print $1;}')" "$@" ; }
 kubectl_describePod()        { kubectl describe pod "$@" ; }
 kubectl_getPods()            { kubectl get pods "$@"; }
 kubectl_getAllPods()         { kubectl get pods --all-namespaces "$@"; }
@@ -194,6 +197,11 @@ kubectl_getNodes()           { kubectl get nodes "$@"; }
 kubectl_logs()               { kubectl logs "$@"; }
 kubectl_enterContainerSh()   { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" sh -c "$1" ; }
 kubectl_enterContainerBash() { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" bash -c "$1" ; }
+
+kubectl_create_byFile()           { kubectl create -f "$@"; }
+kubectl_apply_byFile()           { kubectl apply -f "$@"; }
+kubectl_replace_byFile()           { kubectl replace -f "$@"; }
+kubectl_delete_byFile()           { kubectl delete -f "$@"; }
 #!/usr/bin/env bash
 
 network_findProcessUsingPort() { sudo netstat -tulpn | rg "$1" ; }
