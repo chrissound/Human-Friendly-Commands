@@ -44,3 +44,12 @@ wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}
 
 # file manipulation
 file_delete_line() { sed -i "${2}d" "$1" ;}
+
+print_everyPathLevel_ofPath() { 
+  print "$1"
+
+  if [ "$1" != "/" ]
+  then
+    print_everyPathLevel_ofPath "$(dirname "$1")"
+  fi
+  }

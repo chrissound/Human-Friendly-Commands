@@ -113,6 +113,15 @@ wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}
 
 # file manipulation
 file_delete_line() { sed -i "${2}d" "$1" ;}
+
+print_everyPathLevel_ofPath() { 
+  print "$1"
+
+  if [ "$1" != "/" ]
+  then
+    print_everyPathLevel_ofPath "$(dirname "$1")"
+  fi
+  }
 #!/usr/bin/env bash
 
 git_initAndCommitInitial() { git init; git add .; git commit -m "inital" ;}
@@ -182,6 +191,7 @@ kubectl_describePod()        { kubectl describe pod "$@" ; }
 kubectl_getPods()            { kubectl get pods "$@"; }
 kubectl_getAllPods()         { kubectl get pods --all-namespaces "$@"; }
 
+
 kubectl_getDeployments()     { kubectl get deployments "$@"; }
 kubectl_getAllDeployments()  { kubectl get deployments --all-namespaces "$@"; }
 
@@ -194,6 +204,8 @@ kubectl_getIngress()         { kubectl get ingress "$@"; }
 kubectl_getAllIngress()      { kubectl get ingress --all-namespaces "$@"; }
 
 kubectl_getNodes()           { kubectl get nodes "$@"; }
+kubectl_describeNode()        { kubectl describe node "$@" ; }
+
 kubectl_logs()               { kubectl logs "$@"; }
 kubectl_enterContainerSh()   { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" sh -c "$1" ; }
 kubectl_enterContainerBash() { kubectl exec -it "$(kubectl get pods | tail -n +2 | cut -d' ' -f1 | fzf)" bash -c "$1" ; }

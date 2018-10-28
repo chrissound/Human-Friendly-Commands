@@ -45,6 +45,7 @@ date_hhmmssddmmyyyy
 wget_toStdOut
 wget_ignoreSslCert
 file_delete_line
+print_everyPathLevel_ofPath
 git_initAndCommitInitial
 git_DiffPager
 git_searchCommitMessagesInAllBranches
@@ -79,6 +80,7 @@ kubectl_describeIngress
 kubectl_getIngress
 kubectl_getAllIngress
 kubectl_getNodes
+kubectl_describeNode
 kubectl_logs
 kubectl_enterContainerSh
 kubectl_enterContainerBash
