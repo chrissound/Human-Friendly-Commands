@@ -12,7 +12,7 @@ alias listDirectoryContentsSortByTimeDescend="exa -l --group-directories-first -
 
 #files
 makeFilePermissionExecutable() { chmod +x "$@" ; }
-makeOwnedByMyself() { sudo chown "$USER":"$USER" -R "$@" ; }
+makeOwnedByMyself() { sudo chown "$USER":"$(id -g "$USER")" -R "$@" ; }
 makeFilePermissionEverything() { sudo chmod 777 -R "$@" ; }
 getLastModifiedFileInDirectory() { ls -t "$1" | head -n1 ; }
 get_AbsolutePath_LastModifiedFileInDirectory() {
