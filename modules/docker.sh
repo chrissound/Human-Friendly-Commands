@@ -21,3 +21,5 @@ docker_promptForRunningContainer() { sudo docker ps --format "{{.Names}}" | fzf 
 docker_dockerComposeUp() { sudo docker-compose up ; }
 docker_dockerComposeStop() { sudo docker-compose stop ; }
 
+docker_getImageHash_sha256() { sudo docker inspect --format='{{index .RepoDigests 0}}' "$@";}
+
