@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+# compression
+
 makeZip_CurrentDirectory() { zip -r "$(basename "$PWD" )" . ; }
 makeZip_CurrentDiretory_WithoutHidden() { zip -r  "$(basename "$PWD")" . -x '.*' ; }
+
+makeGZip_CurrentDirectory() { tar -c --use-compress-program=pigz -f "$(basename "$PWD")".tar.gz . ; }
 
 #search
 findByFilename() { find . -name "$1" ; }
@@ -24,10 +28,10 @@ alias filterOnly="rg"
 alias filterExcludeEmptyLines="grep -v -e '^$'"
 
 # misc
-backup () { cp -r "$1" "$1".backup ; }
-backup_appendWithDate () { cp -r "$1" "$1"."$(date_ddmmyyyy)".backup ; }
-backup_appendWithTimeDate () { cp -r "$1" "$1"."$(date_hhmmssddmmyyyy)".backup ; }
-restoreBackup () { cp -r "$1".backup "$1" ; }
+backup () { cp -a "$1" "$1".backup ; }
+backup_appendWithDate () { cp -a "$1" "$1"."$(date_ddmmyyyy)".backup ; }
+backup_appendWithTimeDate () { cp -a "$1" "$1"."$(date_hhmmssddmmyyyy)".backup ; }
+restoreBackup () { cp -a "$1".backup "$1" ; }
 clipboard_copyPath () { readlink --no-newline -f "$1" | xclip -selection clipboard ; }
 clipboard_copyCurrentPath () { clipboard_copyPath "$(pwd)"; }
 # misc (requires xclip)
@@ -45,11 +49,15 @@ wget_ignoreSslCert()  { wget  --no-check-certificate "$@" ;}
 # file manipulation
 file_delete_line() { sed -i "${2}d" "$1" ;}
 
-print_everyPathLevel_ofPath() { 
-  print "$1"
+print_everyPathLevel_ofPath() {
 
-  if [ "$1" != "/" ]
-  then
-    print_everyPathLevel_ofPath "$(dirname "$1")"
+  if [[ "$#" = 0 ]]; then
+      print_everyPathLevel_ofPath "$PWD"
+  else
+      if [ "$1" != "/" ];
+      then
+          print_everyPathLevel_ofPath "$(dirname "$1")"
+      fi
   fi
-  }
+
+}
