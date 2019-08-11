@@ -9,6 +9,7 @@ source modules/misc.sh
 truncate -s 0 commands.sh
 for var in "$@"
 do
+  shellcheck -e SC2164 modules/"$var".sh
   cat modules/"$var".sh >> commands.sh 
 done
 

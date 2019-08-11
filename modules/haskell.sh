@@ -11,6 +11,4 @@ hpack_AddDependencyNaively() {
   fi
 }
 
-hoogle_searchAndCopy() {
-  wget -qO- https://hoogle.haskell.org/\?hoogle\="$1"\&scope\=set%3Astackage\&mode\=json \
-  }
+hoogle_searchAndCopy() { wget -qO- "https://hoogle.haskell.org/?hoogle=${1}&mode=json" ;}

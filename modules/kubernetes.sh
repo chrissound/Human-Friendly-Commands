@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# (requires docker, docker-compose)
 kubectl_describeLastPod()    { kubectl describe pod "$(kubectl get pods --sort-by=.metadata.creationTimestamp | tail -n -1 | awk '{print $1;}')" "$@" ; }
 kubectl_describePod()        { kubectl describe pod "$@" ; }
 kubectl_getPods()            { kubectl get pods "$@"; }
@@ -26,3 +28,15 @@ kubectl_create_byFile()           { kubectl create -f "$@"; }
 kubectl_apply_byFile()           { kubectl apply -f "$@"; }
 kubectl_replace_byFile()           { kubectl replace -f "$@"; }
 kubectl_delete_byFile()           { kubectl delete -f "$@"; }
+
+kubectl_getAll() {
+  kubectl get nodes "$@"
+  kubectl get deployments "$@"
+  kubectl get daemonsets "$@"
+  kubectl get pods "$@"
+  kubectl get rs "$@"
+  kubectl get services  "$@"
+  kubectl get ingress "$@"
+  kubectl get secrets "$@"
+  kubectl get serviceaccounts "$@"
+}

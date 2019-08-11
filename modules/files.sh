@@ -4,6 +4,7 @@
 makeFilePermissionExecutable() { chmod +x "$@" ; }
 makeOwnedByMyself() { sudo chown "$USER":"$(id -g "$USER")" -R "$@" ; }
 makeFilePermissionEverything() { sudo chmod 777 -R "$@" ; }
+# shellcheck disable=SC2012
 getLastModifiedFileInDirectory() { ls -t "$1" | head -n1 ; }
 get_AbsolutePath_LastModifiedFileInDirectory() {
   # remove trailing slash
@@ -14,7 +15,7 @@ get_AbsolutePath_LastModifiedFileInDirectory() {
 delete_EmptyFiles_Recursively() { find . -type f -empty -delete ; }
 delete_Recursive() { rm -rf "$1" ; }
 delete_EverythingInCurrentDir() { find . -delete; }
-get_firstFileWithExtension() { find -iname "*.$1" | head -n 1 ; }
+# get_firstFileWithExtension() { find -iname "*.$1" . | head -n 1 ; }
 
 # directories
 delete_EmptyDirectories_Recursively() { find . -type d -empty -delete ; }
@@ -26,3 +27,5 @@ createFile() {
     mkdir -p -- "$_dir" && touch -- "$p"
   done
 }
+
+vimLastDownloadedFile() { vim ~/Downloads/"$(getLastModifiedFileInDirectory ~/Downloads)" ; }
