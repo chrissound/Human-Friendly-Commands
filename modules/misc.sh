@@ -39,6 +39,7 @@ clipboard_copyFileContents () { xclip < "$1"; }
 sshSocksProxy() { ssh -D 8118 -f -C -q -N "$@" ; }
 newEditFile() { touch "$1" && $EDITOR "$1" ; }
 newEditExecutableFile() { touch "$1" && makeFilePermissionExecutable "$1"  && $EDITOR "$1" ; }
+clipboard_copySshPublicKey() { xclip < ~/.ssh/id_rsa.pub ; }
 
 date_ddmmyyyy () { date '+%d-%m-%Y' ;}
 date_hhmmssddmmyyyy () { date '+%H-%M-%S-%d-%m-%Y' ;}
@@ -61,3 +62,5 @@ print_everyPathLevel_ofPath() {
   fi
 
 }
+
+text_sanitize_filesystem_name () { echo "$1" | sed -e "s/ /-/g" | tr -cd '[:alnum:]_-' ; }

@@ -5,20 +5,23 @@
 # Depends on bin: jq
 # Depends on env: GITHUB_USER, GITHUB_API_TOKEN
 github_createRepo() {
-  projName="$(basename "$PWD")"
-  json=$(jq -n \
-    --arg name "$projName" \
-    --arg description "$1" \
-    '{"name":$name, "description":$description}')
+  (
+    set -e
+    projName="$(basename "$PWD")"
+    json=$(jq -n \
+        --arg name "$projName" \
+        --arg description "$1" \
+        '{"name":$name, "description":$description}')
 
-  curl -u "$GITHUB_USER":"$GITHUB_API_TOKEN" https://api.github.com/user/repos -d "$json"
-  if [ -d .git ]; then
-    git remote set-url origin git@github.com:"$GITHUB_USER"/"$projName".git
-    git push origin master
-  else
-    git init
-    git remote add origin git@github.com:"$GITHUB_USER"/"$projName".git
-    git push origin master
-  fi;
+    curl -u "$GITHUB_USER":"$GITHUB_API_TOKEN" https://api.github.com/user/repos -d "$json"
+    if [ -d .git ]; then
+        git remote add origin git@github.com:"$GITHUB_USER"/"$projName".git
+        git push origin master
+    else
+        git init
+        git remote add origin git@github.com:"$GITHUB_USER"/"$projName".git
+        git push origin master
+    fi;
+  )
 };
 

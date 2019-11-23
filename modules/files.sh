@@ -2,6 +2,7 @@
 
 #files
 makeFilePermissionExecutable() { chmod +x "$@" ; }
+makeAllShFilesPermissionExecutable() { chmod +x ./*.sh ; }
 makeOwnedByMyself() { sudo chown "$USER":"$(id -g "$USER")" -R "$@" ; }
 makeFilePermissionEverything() { sudo chmod 777 -R "$@" ; }
 # shellcheck disable=SC2012

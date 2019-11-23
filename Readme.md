@@ -77,6 +77,7 @@ Just create your own module file within `modules/`, it is just a shell script wi
 ### exa
 ### files
 - makeFilePermissionExecutable
+- makeAllShFilesPermissionExecutable
 - makeOwnedByMyself
 - makeFilePermissionEverything
 - getLastModifiedFileInDirectory
@@ -168,12 +169,14 @@ Just create your own module file within `modules/`, it is just a shell script wi
 - sshSocksProxy
 - newEditFile
 - newEditExecutableFile
+- clipboard_copySshPublicKey
 - date_ddmmyyyy 
 - date_hhmmssddmmyyyy 
 - wget_toStdOut
 - wget_ignoreSslCert
 - file_delete_line
 - print_everyPathLevel_ofPath
+- text_sanitize_filesystem_name 
 ### networking
 - network_findProcessUsingPort
 - network_findProcessIdUsingPort
